@@ -31,7 +31,7 @@ class PokemonBattlesController < ApplicationController
     @pokemon_attack_number = @pokemon1.attack
     @pokemon_attack_number2 = @pokemon2.attack
 
-    @skill_select1 = PokemonSkill.where(pokemon_id: @pokemon1.id).map{|pokemon_skill|
+    @skill_select1 = PokemonSkill.where("pokemon_id = ? AND current_pp > ?", @pokemon1.id, 0).map{|pokemon_skill|
       ["#{pokemon_skill.skill.name} (#{pokemon_skill.current_pp}/#{pokemon_skill.skill.max_pp})", pokemon_skill.skill.id]
     }
     @skill_select2 = PokemonSkill.where(pokemon_id: @pokemon2.id).map{|pokemon_skill|
@@ -101,7 +101,7 @@ class PokemonBattlesController < ApplicationController
     attacker = Pokemon.find(pokemon_attack_params[:attacker])
     defender = Pokemon.find(pokemon_attack_params[:defender])
     skill = Skill.find(pokemon_attack_params[:skill_id])
-    pokemon_skill = PokemonSkill.find_by(pokemon_id: attacker.id, skill_id: skill.id)
+    @pokemon_skill = PokemonSkill.find_by(pokemon_id: attacker.id, skill_id: skill.id)
     damage = PokemonBattleCalculator.calculate_damage(attacker, defender, skill)
    
     defender_hp = defender.current_health_point
@@ -113,13 +113,15 @@ class PokemonBattlesController < ApplicationController
           defender.current_health_point = min_hp
     end
 
-    pokemon_skill.current_pp -= 1
+    @pokemon_skill.current_pp -= 1
+    @pokemon_battle.current_turn += 1
 
     defender.save
-    pokemon_skill.save
+    @pokemon_skill.save
+    @pokemon_battle.save
 
     redirect_to pokemon_battle_url(@pokemon_battle)
-    
+
   end
 
   private

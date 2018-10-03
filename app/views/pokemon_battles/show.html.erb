@@ -54,8 +54,10 @@
 
           </table>
            <div class="my-3">
-              <%= form.submit 'Attack', class: 'btn btn-success col col-lg-4' %>
-              <%= link_to 'Surrender', pokedexes_path, class: 'btn btn-danger float-right col-6' %>
+        <% if @pokemon_battle.current_turn % 2 == 1 %>
+          <tr><td colspan="2"><%= form.submit 'Attack', class: 'btn btn-success col col-lg-4' %></td> 
+          <td colspan="2"> <%= link_to 'Surrender', pokedexes_path, class: 'btn btn-danger float-right col-6' %> </td></tr>
+        <% end %>
             </div>
         
 <% end %>
@@ -110,16 +112,17 @@
           <td>:</td>
           <td><%= select_tag 'pokemon_battle[skill_id]', options_for_select(@skill_select2) , class: 'form-control'  %></td>
         </tr>
-
-   
- 
             
       </table>
 
     <div class="my-3">
-        <tr><td colspan="2"><%= form.submit 'Attack', class: 'btn btn-success col col-lg-4' %></td> 
+      <% if @pokemon_battle.current_turn % 2 == 0 %>
+             <tr><td colspan="2"><%= form.submit 'Attack', class: 'btn btn-success col col-lg-4'%></td>
+         
         <td colspan="2"> <%= link_to 'Surrender', pokedexes_path, class: 'btn btn-danger float-right col-6' %> </td></tr>
-      </div>           <% end %>       
+          <%end%>
+
+     <% end %>       
         
       </div>
     </div>
