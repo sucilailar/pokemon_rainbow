@@ -1,0 +1,56 @@
+
+<div class="container">   
+	
+    <% if notice.present?%>
+      <p id="notice" class="alert alert-success"><%= notice %></p>
+    <%end%>
+	 <%= link_to 'Edit', edit_skill_path(@skill) , class: 'btn btn-primary atas' %> 
+		 <%= link_to 'Back', skills_path, class: 'btn btn-primary atas ' %>
+
+  <div class="row mt-4 mb-4">
+	<div class="mx-auto">
+
+   <table class="mt-4">
+
+     <tr>
+
+        <td colspan="3"><h1><%= @skill.name %></h1></td>
+     </tr>
+
+      <tr>
+        <td><strong>Power</strong></td>
+        <td>:</td>
+        <td><%= @skill.power %></td>
+     </tr>
+
+      <tr>
+        <td><strong>Max PP</strong></td>
+        <td>:</td>
+        <td><%= @skill.max_pp %></td>
+     </tr>
+
+      <tr>
+        <td><strong>Element Type</strong></td>
+        <td>:</td>
+        <td><%= @skill.element_type %></td>
+     </tr>
+
+    	
+
+
+   </table>
+
+ </div>
+
+
+          
+</div>
+          
+</div>
+
+
+  
+
+
+
+

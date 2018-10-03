@@ -1,0 +1,74 @@
+ <main role="main" class="container">
+  <% if notice.present?%>
+      <p id="notice" class="alert alert-success"><%= notice %></p>
+    <%end%>
+<div class="container">   
+    <div class="mx-auto float-right">
+ <%= link_to 'Edit', edit_pokedex_path(@pokedex), class: 'btn btn-primary ' %> 
+        <%= link_to 'Back', pokedexes_path , class: 'btn btn-primary '%> 
+          </div>
+  <div class="row mt-5" >
+ 
+ <div class="col-md-3">
+    
+  <% if !@pokedex.image_url.present? %>
+   <img class="gambar" src=<%= image_path('pika.jpg') %> >
+      <% else %>
+   <img class="gambar mr-4" src=<%= @pokedex.image_url %>>
+    <%end%>
+  
+ </div>
+
+
+<div class="col-md-9 ">
+   <table class="mt-4 ml-4">
+     <tr>
+        <td class="text-align-center" colspan="3"><h1><%= @pokedex.name %><h1></td>
+     </tr>
+
+      <tr>
+        <td><strong>Base Health Point</strong></td>
+        <td>:</td>
+        <td><%= @pokedex.base_health_point %></td>
+     </tr>
+
+      <tr>
+        <td><strong>Base Attack</strong></td>
+        <td>:</td>
+        <td><%= @pokedex.base_attack %></td>
+     </tr>
+
+      <tr>
+        <td><strong>Base Defence</strong></td>
+        <td>:</td>
+        <td><%= @pokedex.base_defence %></td>
+     </tr>
+
+      <tr>
+        <td><strong>Base Speed</strong></td>
+        <td>:</td>
+        <td><%= @pokedex.base_speed %></td>
+     </tr>
+
+      <tr>
+        <td><strong>Element Type</strong></td>
+        <td>:</td>
+        <td><%= @pokedex.element_type %></td>
+     </tr>
+
+   </table>
+      
+       
+
+  
+ </div>
+          
+  </div>
+        
+           
+  
+</div>
+
+
+  
+

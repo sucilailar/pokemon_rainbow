@@ -1,0 +1,24 @@
+<%= form_for([@pokemon, @pokemon_skill]) do |form| %>
+  <% if pokemon.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pokemon.errors.count, "error") %> prohibited this pokemon from being saved:</h2>
+
+      <ul>
+      <% pokemon.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :skill_id %>
+    <%= select_tag "pokemon_skill[skill_id]", options_for_select(@skill_select) , class: 'form-control'  %>
+  </div>
+
+ 
+
+  <div class="actions">
+    <%= form.button 'Add Skill' , class: 'btn btn-primary mt-1 mb-3 float-right w-25'  %>
+  </div>
+<% end %>

@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Skills</h1>
+<%= link_to 'New Skill', new_skill_path , class: 'btn btn-primary'%>
+
+
+<table class="table table-striped mt-3" border="1">
+  <thead class="thead-dark text-center">
+    <tr>
+       <td>No</td>
+       <td>Name</td>
+       <td>Power</td>
+       <td>Max PP</td>
+       <td>Element Type</td>
+       <td>Action</td>
+       <td colspan="3">Number</td>
+    
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @skills.each_with_index do |skill, index| %>
+      <tr>
+        <td><%= @row_number + index %></td>
+        <td><%= skill.name %></td>
+        <td><%= skill.power %></td>
+        <td><%= skill.max_pp %></td>
+        <td><%= skill.element_type %></td>
+        <td><center><%= link_to 'Show', skill, class: 'btn btn-primary' %></center></td>
+        <td><center><%= link_to 'Edit', edit_skill_path(skill), class: 'btn btn-warning' %></center></td>
+        <td><center><%= link_to 'Destroy', skill, class: 'btn btn-danger'  , method: :delete, data: { confirm: 'Are you sure?'} %></center></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div class="pagin float-right">
+<%= will_paginate @dexes, :renderer => WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+</div>
+<br>
+

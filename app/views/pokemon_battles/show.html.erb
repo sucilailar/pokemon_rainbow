@@ -1,0 +1,133 @@
+<div class="container my-5">
+   <% if notice.present?%>
+      <p id="notice" class="alert alert-success"><%= notice %></p>
+    <%end%>
+  <div class="row">
+    <div class="mx-auto">
+      <div class="col">
+        
+
+          <table class="mx-auto">
+            <tr>
+              <td>Pokemon 1 &nbsp</td>
+              <td>: &nbsp</td>
+              <td><%= @pokemon_name %></td>
+            </tr>
+
+            <tr>
+              <td colspan="3">
+                <% if !@pokedex.image_url.present? %>
+                  <img class="gambar" src=<%= image_path('pika.jpg') %> >
+                  <% else %>
+                  <img class="gambar" src=<%= @pokedex.image_url %>>
+                <%end%>
+              </td>
+            </tr>
+          
+                <tr>
+              <td>Name</td>
+              <td>:</td>
+              <td><%= @pokedex.name %></td>
+            </tr>
+
+                <tr>
+              <td>Health Point</td>
+              <td>:</td>
+              <td><%= @pokemon_battle.pokemon1.current_health_point %> / <%= @pokemon_battle.pokemon1_max_health_point %></td>
+            </tr>
+
+        <%= form_for @pokemon_battle, url: attack_pokemon_battle_path(@pokemon_battle) do |form| %> 
+
+           <tr><%= hidden_field_tag 'pokemon_battle[attacker]', @pokemon1.id %></tr>
+
+           <tr><%= hidden_field_tag 'pokemon_battle[defender]', @pokemon2.id %></tr>
+
+
+            <tr>
+              <td>Attack</td>
+              <td>:</td>
+              <td><%= select_tag 'pokemon_battle[skill_id]', options_for_select(@skill_select1) , class: 'form-control'  %></td>
+            </tr>
+
+            
+         
+
+          </table>
+           <div class="my-3">
+              <%= form.submit 'Attack', class: 'btn btn-success col col-lg-4' %>
+              <%= link_to 'Surrender', pokedexes_path, class: 'btn btn-danger float-right col-6' %>
+            </div>
+        
+<% end %>
+          
+      </div>
+    </div>
+    
+    <div class="col text-center">
+      <h1><p class="mx-auto">VS</p></h1>
+    </div>
+
+    <div class="mx-auto">
+    <div class="col ">
+      <table class="mx-auto">
+        <tr>
+          <td>Pokemon 2 &nbsp</td>
+          <td>: &nbsp</td>
+          <td><%= @pokemon_name2 %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        
+        <tr>
+          <td colspan="3"><% if !@pokedex.image_url.present? %>
+             <img class="gambar" src=<%= image_path('pika.jpg') %> >
+          <% else %>
+            <img class="gambar" src=<%= @pokedex2.image_url %>>
+          <%end%>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Name</td>
+          <td>:</td>
+          <td><%= @pokedex2.name %></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>Health Point</td>
+          <td>:</td>
+          <td><%= @pokemon_battle.pokemon2.current_health_point %> / <%= @pokemon_battle.pokemon2_max_health_point %></td>
+        </tr>
+              <%= form_for @pokemon_battle, url: attack_pokemon_battle_path(@pokemon_battle) do |form| %> 
+
+        <tr><%= hidden_field_tag 'pokemon_battle[attacker]', @pokemon2.id %></tr>
+
+        <tr><%= hidden_field_tag 'pokemon_battle[defender]', @pokemon1.id %></tr>
+
+        <tr>
+          <td>Attack</td>
+          <td>:</td>
+          <td><%= select_tag 'pokemon_battle[skill_id]', options_for_select(@skill_select2) , class: 'form-control'  %></td>
+        </tr>
+
+   
+ 
+            
+      </table>
+
+    <div class="my-3">
+        <tr><td colspan="2"><%= form.submit 'Attack', class: 'btn btn-success col col-lg-4' %></td> 
+        <td colspan="2"> <%= link_to 'Surrender', pokedexes_path, class: 'btn btn-danger float-right col-6' %> </td></tr>
+      </div>           <% end %>       
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

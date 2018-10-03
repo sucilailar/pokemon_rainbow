@@ -1,0 +1,23 @@
+pokemon_battle
+- id => 1
+
+turn 1
+	next turn untuk id 1 pokemon battle
+pokemon battle id 1 => turn nambah
+
+- player 1
+- player 2
+- turn
+- hp player 1
+- hp player 2
+- winner 
+- loser
+- state
+
+GET p_battle/1
+	orang input form buat next turn
+POST ?
+
+
+GET p_battle/1
+	

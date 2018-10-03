@@ -1,0 +1,23 @@
+Pokemon 1								Pokemon 2
+
+attack
+=> params[:attack] = {
+	attacker_id (pokemon1_id)
+	defender_id (pokemon2_id)
+	skill
+}
+
+										
+										attack
+										=> params[:attack] = {
+											attacker_id (pokemon2_id)
+											defender_id (pokemon1_id)
+											skill
+										}
+
+
+def attack
+	attacker = Pokemon.find(params[:attack][:attacker_id])
+	defender = Pokemon.find(params[:attack][:defender_id])
+	damage = PokemonBattleCalculator.calculate_damage(attacker, defender, skill)
+end

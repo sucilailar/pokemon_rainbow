@@ -1,0 +1,67 @@
+ <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+           <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+                
+<%= form_with(model: pokedex, local: true) do |form| %>
+  <% if pokedex.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><%= pluralize(pokedex.errors.count, "error") %> prohibited this pokedex from being saved:</h2>
+
+      <ul>
+      <% pokedex.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="control-group field">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="control-group field">
+    <%= form.label :base_health_point %>
+    <%= form.number_field :base_health_point, class: 'form-control' %>
+  </div>
+
+  <div class="control-group field">
+    <%= form.label :base_attack %>
+    <%= form.number_field :base_attack , class: 'form-control'%>
+  </div>
+
+  <div class="control-group field">
+    <%= form.label :base_defence %>
+    <%= form.number_field :base_defence, class: 'form-control' %>
+  </div>
+
+  <div class="control-group field">
+    <%= form.label :base_speed %>
+    <%= form.number_field :base_speed,class: 'form-control' %>
+  </div>
+
+  <div class="control-group field">
+    <%= form.label :element_type %>
+    <%= select_tag "pokedex[element_type]", options_for_select(Pokedex::EL_TYPE, selected: @pokedex.element_type), class: 'form-control'  %>
+  </div>
+  
+
+
+  <div class="control-group field">
+    <%= form.label :image_url %>
+    <%= form.text_field :image_url, class: 'form-control'%>
+  </div>
+
+  <div class="actions">
+    <%= form.submit :class => 'btn btn-primary my-2 float-right w-25'%>
+  </div>
+<% end %>
+
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+

@@ -1,0 +1,103 @@
+ <main role="main" class="container">
+  <% if notice.present?%>
+      <p id="notice" class="alert alert-success mt-3"><%= notice %></p>
+    <%end%>
+
+     <%= link_to 'Heal All', edit_pokemon_path(@pokemon), class: 'btn btn-success atas mb-3' %>
+ <%= link_to 'Edit', edit_pokemon_path(@pokemon), class: 'btn btn-warning atas mb-3' %> 
+     <%= link_to 'Back', skills_path, class: 'btn btn-primary atas mb-3' %>
+<div class="container row"> 
+      <div class="col-md-3 my-2">
+    
+  <% if !@pokedex.image_url.present? %>
+   <img class="gambar"> src=<%= image_path('pika.jpg') %> >
+      <% else %>
+   <img class="gambar" src=<%= @pokedex.image_url %>>
+    <%end%>
+  
+ </div>
+
+
+<table class="mx-auto col-md-7 mt-2">
+  <tr>
+    <td class= "text-align-center" colspan="3"><%= @pokemon.name %></td>
+  </tr>
+  <tr>
+    <td>Pokedex</td>
+    <td>:</td>
+    <td><%= @pokemon.pokedex.name %></td>
+  </tr>
+
+  
+
+  <tr>
+    <td>Level</td>
+    <td>:</td>
+    <td><%= @pokemon.level %></td>
+  </tr>
+
+  <tr>
+    <td>Max Health Point</td>
+    <td>:</td>
+    <td> <%= @pokemon.max_health_point %></td>
+  </tr>
+
+  <tr>
+    <td>Current Health Point</td>
+    <td>:</td>
+    <td><%= @pokemon.current_health_point %></td>
+  </tr>
+
+  <tr>
+    <td>Attack</td>
+    <td>:</td>
+    <td> <%= @pokemon.attack %></td>
+  </tr>
+
+  <tr>
+    <td>Defence</td>
+    <td>:</td>
+    <td><%= @pokemon.defence %></td>
+  </tr>
+
+  <tr>
+    <td>Speed</td>
+    <td>:</td>
+    <td><%= @pokemon.speed %></td>
+  </tr>
+
+  <tr>
+    <td>Current Experience</td>
+    <td>:</td>
+    <td><%= @pokemon.current_experience %></td>
+  </tr>
+
+</table>
+
+<table class="table table-striped mt-3" border="1">
+   <tr>
+      <td><strong>Skill Name</strong></td>
+      <td>Power</td>
+      <td>Max PP</td>
+      <td>Element Type</td>
+      <td>Current PP</td>
+      <td>Action</td>
+    </tr>
+    <% @pokemon_skills.each do |pokemon_skill| %>
+   
+
+    <tr>
+      <td><%= pokemon_skill.skill.name %></td>
+      <td><%= pokemon_skill.skill.power %></td>
+      <td><%= pokemon_skill.skill.max_pp %></td>
+      <td><%= pokemon_skill.skill.element_type %></td>
+      <td><%= pokemon_skill.current_pp %></td>
+      <td><%= link_to 'Destroy', [@pokemon,pokemon_skill],  class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <%end%>
+
+</table>
+</div>
+
+
+    <%= render 'pokemon_skill_form', pokemon: @pokemon %>

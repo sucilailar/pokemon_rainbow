@@ -1,0 +1,72 @@
+footer dibuat full kaya header
+button new ke table kasih jarak
+table dikasih row number
+paginationnya dibuat di kanan
+button di form belum pake button bootstrap
+flash alert dipindah ke masing2 html (index, show)
+name nya dibuat heading di show
+button edit, back, show nya pake bootstrap
+class Pokedexe diganti Pokedex
+
+width form pokedex & skill beda, buat konsisten
+button create skill kecil aja
+button edit warnanya kuning
+space table dan button new pokedex terlalu jauh
+
+
+misal pokemon namanya suci, pokedex bulbasaur
+pokedex bulbasaur element type nya air
+
+daftar skill
+element type air => tenggelamkan, bikin hipotermia
+element type api => bakar, bikin kepanasan
+
+
+
+
+
+
+pokemon:
+V pokedex display name jangan id
+V urutan di table pokemon name, pokedex name
+V kurang button heal & heal all (lihat wireframe)
+V urutan form name dulu baru pokedex
+V show kasih foto pokedexnya
+
+pokedex:
+V button edit kuning
+V header table bold
+V button show|back di form hapus aja
+
+
+all:
+V buat konsisten peletakan button, warna button, table, pagination antara index, show, form
+hapus code yang ga perlu kaya render :json
+V hapus method pokemon_skill controller yang ga perlu kaya new, edit, index, show
+V folder view pokemon_skill dihapus aja kalo ga dipake
+V hapus view yang lainnya juga yang ga dipake
+V buat konsisten cara validasi di model
+
+pokemon error di higlight
+konsisten min number 0
+validasi pokemon skill => skill yang dipilih dari element type pokedex
+benerin footer
+pokemon index tambah button heal all sebelah new
+pokemon show heal all ganti heal aja
+benerin button back pokemon
+
+
+
+
+form
+style
+button index
+validate
+
+V jangan pake respond_to |format|
+V hapus format.html, format.json di controller
+V benerin yang belum konsisten
+V pertama buat battle otomatis turn =1, state = ongoing
+V custom css buat gambar belum jalan atau cek lagi kenapa ga sama (contohnya di 		pokemon battle)
+V ubah attribute pokemon_2_max_health_point di pokemon_battle jadi pokemon2_max_health_point
+V benerin pokemon battle show (health point belum, select attack pokemon 2 belum)

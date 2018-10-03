@@ -1,0 +1,28 @@
+<%= form_with(model: pokemon, local: true) do |form| %>
+  <% if pokemon.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><%= pluralize(pokemon.errors.count, "error") %> prohibited this pokemon from being saved:</h2>
+
+      <ul>
+      <% pokemon.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <div class="field">
+    <%= form.label :name %>
+      <%= form.text_field :name , class: 'form-control'%>
+  </div>
+
+  <div class="field">
+    <%= form.label :pokedex_id %>
+    <%= select_tag "pokemon[pokedex_id]", options_for_select(Pokedex.all.pluck(:name, :id), selected: @pokemon.name), class: 'form-control'  %>
+  </div>
+
+
+
+  <div class="actions">
+    <%= form.submit class: 'btn btn-primary float-right my-2 w-25' %>
+  </div>
+<% end %>

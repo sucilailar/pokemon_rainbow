@@ -1,0 +1,62 @@
+<%= form_with(model: pokemon_battle, local: true) do |form| %>
+  <% if pokemon_battle.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pokemon_battle.errors.count, "error") %> prohibited this pokemon_battle from being saved:</h2>
+
+      <ul>
+      <% pokemon_battle.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :pokemon1_id %>
+    <%= form.number_field :pokemon1_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pokemon2_id %>
+    <%= form.number_field :pokemon2_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :current_turn %>
+    <%= form.number_field :current_turn %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state %>
+    <%= form.text_field :state %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pokemon_winner_id %>
+    <%= form.number_field :pokemon_winner_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pokemon_loser_id %>
+    <%= form.number_field :pokemon_loser_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :experience_gain %>
+    <%= form.number_field :experience_gain %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pokemon1_max_health_point %>
+    <%= form.number_field :pokemon1_max_health_point %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pokemon_2_max_health_point %>
+    <%= form.number_field :pokemon_2_max_health_point %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

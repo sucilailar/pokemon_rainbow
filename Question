@@ -1,0 +1,58 @@
+Question: pokemon battle show dan index
+karena pokemon_battle punya 2 column merefer ke table yang sama, maka tidak bsa langsung dipanggil pokemon_battle.pokemon.name harus di definisikan di model, custom belongsto
+
+untuk nyari attacker nya, kita butuh id untuk akses ke tabel pokemon untuk ngambil value level, attack, defence,
+tapi kan ntar playernya gantian, ngambil value nya gmna biar gantian atau intinya biar ngambil valuenya ga 2x
+
+apakah perlu di definisiin 1 1 kita ambil id pokemon1 dan pokemon2?
+
+trus pas gantian nya gmna
+
+
+perbedaan form_with _tag, _for
+
+_for = kalau kita punya model
+
+form_with without a model:
+
+<%= form_with url: users_path do |form| %>
+  <%= form.text_field :email %>
+  <%= form.submit %>
+<% end %>
+form_with with a model:
+
+<%= form_with model: @user do |form| %>
+  <%= form.text_field :email %>
+  <%= form.submit %>
+<% end %>
+
+
+error: undefined method `[]' for nil:NilClass
+
+
+path and url helpers
+
+show and destroy
+
+
+resource :geocoder
+resolve('Geocoder') { [:geocoder] }
+
+bedanya upate dan edit, kenapa di controller edit biasanya kosong
+
+
+<%= link_to 'Edit Ad', [:edit, @magazine, @ad] %>
+
+
+
+resource :basket
+ 
+resolve("Basket") { [:basket] }
+
+
+<%= form_for @basket do |form| %>
+  <!-- basket form -->
+<% end %>
+
+
+Video.find_by(identifier: params[:identifier])

@@ -1,0 +1,40 @@
+<%= form_with(model: pokemon_battle, local: true) do |form| %>
+  <% if pokemon_battle.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><%= pluralize(pokemon_battle.errors.count, "error") %> prohibited this pokemon_battle from being saved:</h2>
+
+      <ul>
+      <% pokemon_battle.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="field float-left col">
+          <%= form.label :pokemon1_id %>
+          <%= select_tag "pokemon_battle[pokemon1_id]", options_for_select(@pokemon_name) , class: 'form-control'  %>
+        </div>
+
+          <div class="field float-right col">
+            <h2 class="text-center">VS</h2>
+          </div>
+
+        <div class="field float-right col ">
+         <%= form.label :pokemon2_id %>
+          <%= select_tag "pokemon_battle[pokemon2_id]", options_for_select(@pokemon_name) , class: 'form-control mh-100'  %>
+        </div>
+
+
+      </div>  
+    </div>
+
+    <div class="actions mx-auto d-flex justify-content-center mt-4">
+    <%= form.submit class: 'btn btn-primary my-2 w-25' %>
+  </div>
+<% end %>

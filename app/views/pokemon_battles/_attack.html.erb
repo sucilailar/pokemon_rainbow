@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pokemon1:</strong>
+  <%= @pokemon_battle.pokemon.name %>
+</p>
+
+<p>
+  <strong>Pokemon2:</strong>
+  <%= @pokemon_battle.pokemon2_id %>
+</p>
+
+<p>
+  <strong>Current turn:</strong>
+  <%= @pokemon_battle.current_turn %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @pokemon_battle.state %>
+</p>
+
+<p>
+  <strong>Pokemon winner:</strong>
+  <%= @pokemon_battle.pokemon_winner_id %>
+</p>
+
+<p>
+  <strong>Pokemon loser:</strong>
+  <%= @pokemon_battle.pokemon_loser_id %>
+</p>
+
+<p>
+  <strong>Experience gain:</strong>
+  <%= @pokemon_battle.experience_gain %>
+</p>
+
+<p>
+  <strong>Pokemon1 max health point:</strong>
+  <%= @pokemon_battle.pokemon1_max_health_point %>
+</p>
+
+<p>
+  <strong>Pokemon 2 max health point:</strong>
+  <%= @pokemon_battle.pokemon_2_max_health_point %>
+</p>
+
+<%= link_to 'Edit', edit_pokemon_battle_path(@pokemon_battle) %> |
+<%= link_to 'Back', pokemon_battles_path %>
