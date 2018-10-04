@@ -70,3 +70,12 @@ V pertama buat battle otomatis turn =1, state = ongoing
 V custom css buat gambar belum jalan atau cek lagi kenapa ga sama (contohnya di 		pokemon battle)
 V ubah attribute pokemon_2_max_health_point di pokemon_battle jadi pokemon2_max_health_point
 V benerin pokemon battle show (health point belum, select attack pokemon 2 belum)
+
+state
+logic select 2 samain sama select 1
+button disable klw sudah selesai , state = finish
+
+jika skill sudah habis button attack hilang, hnya ba surrender
+
+
+tampilkan turn

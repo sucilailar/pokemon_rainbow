@@ -1,6 +1,6 @@
 <div class="container my-5">
    <% if notice.present?%>
-      <p id="notice" class="alert alert-success"><%= notice %></p>
+      <p id="notice" class="alert alert-danger"><%= notice %></p>
     <%end%>
   <div class="row">
     <div class="mx-auto">
@@ -54,10 +54,16 @@
 
           </table>
            <div class="my-3">
+             <%if @pokemon_battle.state == "ongoing"%>
         <% if @pokemon_battle.current_turn % 2 == 1 %>
-          <tr><td colspan="2"><%= form.submit 'Attack', class: 'btn btn-success col col-lg-4' %></td> 
-          <td colspan="2"> <%= link_to 'Surrender', pokedexes_path, class: 'btn btn-danger float-right col-6' %> </td></tr>
+          <% if @skill_select1.present? %>
+             <tr><td colspan="2"><%= form.submit 'Attack', class: 'btn btn-success col col-lg-4'%></td>
+          <%else%>
+              <tr><td colspan="2"><%= form.submit 'Attack', class: 'btn btn-success col col-lg-4',  disabled: true%></td>
+          <% end %>
+          <td colspan="2"> <%= form.submit 'Surrender',  formaction: surrender_pokemon_battle_path, class: 'btn btn-danger float-right col-6' %> </td></tr>
         <% end %>
+        <%end%>
             </div>
         
 <% end %>
@@ -67,6 +73,10 @@
     
     <div class="col text-center">
       <h1><p class="mx-auto">VS</p></h1>
+      <h2>
+        <h2>TURN GAME <%=  @pokemon_battle.current_turn %><h2>
+          
+      </h2>
     </div>
 
     <div class="mx-auto">
@@ -116,13 +126,19 @@
       </table>
 
     <div class="my-3">
+       <%if @pokemon_battle.state == "ongoing"%>
       <% if @pokemon_battle.current_turn % 2 == 0 %>
-             <tr><td colspan="2"><%= form.submit 'Attack', class: 'btn btn-success col col-lg-4'%></td>
          
-        <td colspan="2"> <%= link_to 'Surrender', pokedexes_path, class: 'btn btn-danger float-right col-6' %> </td></tr>
-          <%end%>
+          <% if @skill_select2.present? %>
+              <tr><td colspan="2"><%= form.submit 'Attack', class: 'btn btn-success col col-lg-4'%></td>
+          <% end %>
+         
+        <td colspan="2"> <%= form.submit 'Surrender', formaction: surrender_pokemon_battle_path, class: 'btn btn-danger float-right col-6' %> </td></tr>
+      <%end%>
 
-     <% end %>       
+      <%end%>
+
+    <% end %>       
         
       </div>
     </div>

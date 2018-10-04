@@ -29,8 +29,8 @@
         <td><%= pokemon_battle.pokemon2.name %></td>
         <td><%= pokemon_battle.current_turn %></td>
         <td><%= pokemon_battle.state %></td>
-        <td><%= pokemon_battle.pokemon_winner_id %></td>
-        <td><%= pokemon_battle.pokemon_loser_id %></td>
+        <td><%= pokemon_battle.pokemon_winner.name if pokemon_battle.pokemon_winner_id.present? %> </td>
+        <td><%= pokemon_battle.pokemon_loser.name if pokemon_battle.pokemon_loser_id.present? %></td>
         <td><%= pokemon_battle.experience_gain %></td>
         <td><%= pokemon_battle.pokemon1_max_health_point %></td>
         <td><%= pokemon_battle.pokemon2_max_health_point %></td>

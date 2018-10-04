@@ -32,11 +32,25 @@ class PokemonBattleCalculator < TypeChart
 				50.to_f + 2.to_f * stab.to_f * calculate_resistance.to_f * (random_number.to_f / 100)
 
 		return damage.to_i
-
-		
-
-
 	end
+
+
+	def self.calculate_experience(pokemon_enemy_level)
+		random_number = rand(20..150)
+		experience_gain = random_number.to_f * pokemon_enemy_level
+		return experience_gain
+	end
+
+	def self.level_up?(level_winner_id, total_experience_winner_pokemon)
+
+		level_limit = (2**level_winner_id)*100
+
+		if level_limit #jika total expereience >= level limit return true
+			return true
+		end
+	end
+
+	
 
 	
 end

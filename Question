@@ -56,3 +56,18 @@ resolve("Basket") { [:basket] }
 
 
 Video.find_by(identifier: params[:identifier])
+
+
+
+jika health point pokemon1 == 0 || pokemon2 == 0
+if pokemon1.health_point == 0
+	notice : pokemon 2 WIN
+else pokemon2.health_point == 0
+	notice :pokemon 1 WIN
+end
+
+maka muncul notice pokemon mana yg health point nya
+
+
+defender
+attacker.cu

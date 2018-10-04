@@ -1,6 +1,6 @@
 class PokemonBattlesController < ApplicationController
-  before_action :set_pokemon_battle, only: [:attack, :show, :edit, :update, :destroy]
-
+  before_action :set_pokemon_battle, only: [ :surrender, :attack, :show, :edit, :update, :destroy]
+  #dijalankan pada method yg ada di dalam only, tdk dijalankan pada method except, untuk mengurangi pengulangan 
   # GET /pokemon_battles
   # GET /pokemon_battles.json
   def index
@@ -34,7 +34,7 @@ class PokemonBattlesController < ApplicationController
     @skill_select1 = PokemonSkill.where("pokemon_id = ? AND current_pp > ?", @pokemon1.id, 0).map{|pokemon_skill|
       ["#{pokemon_skill.skill.name} (#{pokemon_skill.current_pp}/#{pokemon_skill.skill.max_pp})", pokemon_skill.skill.id]
     }
-    @skill_select2 = PokemonSkill.where(pokemon_id: @pokemon2.id).map{|pokemon_skill|
+    @skill_select2 = PokemonSkill.where("pokemon_id = ? AND current_pp > ?", @pokemon2.id, 0).map{|pokemon_skill|
         ["#{pokemon_skill.skill.name} (#{pokemon_skill.current_pp}/#{pokemon_skill.skill.max_pp})", pokemon_skill.skill.id]
     }
 
@@ -80,7 +80,6 @@ class PokemonBattlesController < ApplicationController
   # PATCH/PUT /pokemon_battles/1
   # PATCH/PUT /pokemon_battles/1.json
   def update
-    
       if @pokemon_battle.update(pokemon_battle_params)
         redirect_to @pokemon_battle, notice: 'Pokemon battle was successfully updated.'
       else
@@ -98,30 +97,79 @@ class PokemonBattlesController < ApplicationController
   def attack
    # require 'pry'
    #  binding.pry
+
     attacker = Pokemon.find(pokemon_attack_params[:attacker])
     defender = Pokemon.find(pokemon_attack_params[:defender])
     skill = Skill.find(pokemon_attack_params[:skill_id])
     @pokemon_skill = PokemonSkill.find_by(pokemon_id: attacker.id, skill_id: skill.id)
     damage = PokemonBattleCalculator.calculate_damage(attacker, defender, skill)
-   
-    defender_hp = defender.current_health_point
 
-    if defender_hp < damage
+    @defender_hp = defender.current_health_point
+    if @defender_hp < damage
          defender.current_health_point = 0
     else
-          min_hp = defender_hp - damage
+          min_hp = @defender_hp - damage
           defender.current_health_point = min_hp
     end
-
-    @pokemon_skill.current_pp -= 1
     @pokemon_battle.current_turn += 1
-
-    defender.save
+    @pokemon_skill.current_pp -= 1
+    if defender.current_health_point == 0 || attacker.current_health_point == 0
+      if defender.current_health_point == 0
+        @pokemon_battle.pokemon_winner_id = attacker.id
+        @pokemon_battle.pokemon_loser_id = defender.id
+        @pokemon_winner = 
+        @pokemon_battle.state = "finish"
+        flash[:notice] = "#{attacker.name} WIN, #{defender.name} LOSE"
+      else
+        @pokemon_battle.pokemon_winner_id = defender.id
+        @pokemon_battle.pokemon_loser_id = attacker.id
+        @pokemon_battle.state = "finish"
+        flash[:notice] = "Pokemon 1 WIN, Pokemon 2 LOSE"
+      end
+    end
     @pokemon_skill.save
+    defender.save
+   @pokemon_battle.save
+
+    if @pokemon_battle.pokemon_winner_id.present?
+
+        winner = @pokemon_battle.pokemon_winner_id
+        loser = @pokemon_battle.pokemon_loser_id
+
+         pokemon_enemy_level = Pokemon.find(loser)
+         winner_id = Pokemon.find(winner)
+       
+        # @pokemon_winner_name = @pokemon_winner.name
+        # @pokemon_loser_name = @pokemon_loser.name
+        @pokemon_enemy_level = Pokemon.find(loser)
+        @winner_id = Pokemon.find(winner)
+        enemy_level = @pokemon_enemy_level.level
+
+        experience_gain = PokemonBattleCalculator.calculate_experience(enemy_level)
+          require 'pry'
+          binding.pry
+        @winner_id.current_experience = winner_id.current_experience + experience_gain
+        @winner_id.save
+        @pokemon_battle.experience_gain = experience_gain
+
+    end
+   
     @pokemon_battle.save
 
     redirect_to pokemon_battle_url(@pokemon_battle)
+  end
 
+  def surrender
+    # require 'pry'
+    # binding.pry
+    attacker = Pokemon.find(pokemon_attack_params[:attacker])
+    defender = Pokemon.find(pokemon_attack_params[:defender])
+    @pokemon_battle.pokemon_winner_id = defender.id
+    @pokemon_battle.pokemon_loser_id = attacker.id
+    @pokemon_battle.state = "finish"
+    @pokemon_battle.save
+    flash[:notice] = "#{attacker.name} LOSE, #{defender.name} WIN"
+    redirect_to pokemon_battle_url(@pokemon_battle)
   end
 
   private

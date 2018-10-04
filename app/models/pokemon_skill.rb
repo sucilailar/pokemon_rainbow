@@ -3,7 +3,7 @@ class PokemonSkill < ApplicationRecord
 	belongs_to :pokemon
 
 	validates :skill_id, uniqueness: { scope: :pokemon_id }
-	validates :current_pp, presence: true,  :numericality => { greater_than: 0 }
+	validates :current_pp, presence: true,  :numericality => { greater_than_or_equal_to: 0 }
 	validate :val_current_pp_max_pp
 
 	def val_current_pp_max_pp
