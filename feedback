@@ -79,3 +79,9 @@ jika skill sudah habis button attack hilang, hnya ba surrender
 
 
 tampilkan turn
+
+benerin space , hanya ada antar method
+tab size =2 , pok_calulator
+hilangkan comment yg ga perlu
+binding pry comment
+beneri nama variabel harus sesuai dengan apa yg d set
