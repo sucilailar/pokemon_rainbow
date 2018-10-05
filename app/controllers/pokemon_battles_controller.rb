@@ -1,8 +1,6 @@
 class PokemonBattlesController < ApplicationController
   before_action :set_pokemon_battle, only: [ :surrender, :attack, :show, :edit, :update, :destroy]
-  #dijalankan pada method yg ada di dalam only, tdk dijalankan pada method except, untuk mengurangi pengulangan 
-  # GET /pokemon_battles
-  # GET /pokemon_battles.json
+
   def index
    per_page = 5
     if params[:page].present?
@@ -74,83 +72,28 @@ class PokemonBattlesController < ApplicationController
     attacker = Pokemon.find(pokemon_attack_params[:attacker])
     defender = Pokemon.find(pokemon_attack_params[:defender])
     skill = Skill.find(pokemon_attack_params[:skill_id])
-    @pokemon_skill = PokemonSkill.find_by(pokemon_id: attacker.id, skill_id: skill.id)
-    damage = PokemonBattleCalculator.calculate_damage(attacker, defender, skill) 
-    if defender.current_health_point < damage
-         defender.current_health_point = 0
+    @action_params = params[:action]
+    @battle_encaps = BattleEngine.new(attacker, defender, skill, @pokemon_battle, @action_params)
+    if @battle_encaps.valid_next_turn?
+      @battle_encaps.next_turn!
     else
-          min_hp = defender.current_health_point - damage
-          defender.current_health_point = min_hp
+      flash[:notice] = "Invalid Next Turn"
     end
-    @pokemon_battle.current_turn += 1
-    @pokemon_skill.current_pp -= 1
-    @pokemon_skill.save
-    defender.save
-    if defender.current_health_point == 0 || attacker.current_health_point == 0
-      if defender.current_health_point == 0
-        @pokemon_battle.pokemon_winner_id = attacker.id
-        @pokemon_battle.pokemon_loser_id = defender.id
-        @pokemon_battle.state = "finish"
-        flash[:notice] = "#{attacker.name} WIN, #{defender.name} LOSE"
-      else
-        @pokemon_battle.pokemon_winner_id = defender.id
-        @pokemon_battle.pokemon_loser_id = attacker.id
-        @pokemon_battle.state = "finish"
-        flash[:notice] = "#{defender.name} WIN, #{attacker.name} LOSE"
-      end
-      @pokemon_battle.save
-    end
+
     if @pokemon_battle.pokemon_winner_id.present?
-      loser = Pokemon.find(@pokemon_battle.pokemon_loser_id)
-      winner = Pokemon.find(@pokemon_battle.pokemon_winner_id)  
-        enemy_level = loser.level
-        experience_gain = PokemonBattleCalculator.calculate_experience(loser.level)
-        winner.current_experience = winner.current_experience + experience_gain
-        @pokemon_battle.experience_gain = experience_gain
-        is_level_up = PokemonBattleCalculator.level_up?(winner.level, winner.current_experience)
-      if is_level_up == true
-         new_level = Math::log2(winner.current_experience) - 6
-         status_up = PokemonBattleCalculator.calculate_level_up_extra_stats
-         winner.level = new_level
-         winner.current_health_point = winner.current_health_point + status_up.health
-         winner.attack = winner.attack + status_up.attack
-         winner.defence = winner.defence + status_up.defence
-         winner.speed = winner.speed + status_up.speed  
-      end
-      winner.save
+      flash[:notice] = "#{@pokemon_battle.pokemon_winner.name} WIN, #{@pokemon_battle.pokemon_loser.name} LOSE"
     end
-    @pokemon_battle.save
     redirect_to pokemon_battle_url(@pokemon_battle)
   end
 
   def surrender
     attacker = Pokemon.find(pokemon_attack_params[:attacker])
     defender = Pokemon.find(pokemon_attack_params[:defender])
-    @pokemon_battle.pokemon_winner_id = defender.id
-    @pokemon_battle.pokemon_loser_id = attacker.id
-    @pokemon_battle.state = "finish"
-    @pokemon_battle.save
-    flash[:notice] = "#{attacker.name} LOSE, #{defender.name} WIN"
+    skill = Skill.find(pokemon_attack_params[:skill_id])
+    @battle_encaps = BattleEngine.new(attacker, defender, skill, @pokemon_battle)
     if @pokemon_battle.pokemon_winner_id.present?
-      loser = Pokemon.find(@pokemon_battle.pokemon_loser_id)
-      winner = Pokemon.find(@pokemon_battle.pokemon_winner_id)  
-        enemy_level = loser.level
-        experience_gain = PokemonBattleCalculator.calculate_experience(loser.level)
-        winner.current_experience = winner.current_experience + experience_gain
-        @pokemon_battle.experience_gain = experience_gain
-        is_level_up = PokemonBattleCalculator.level_up?(winner.level, winner.current_experience)
-      if is_level_up == true
-         new_level = Math::log2(winner.current_experience) - 5
-         status_up = PokemonBattleCalculator.calculate_level_up_extra_stats
-         winner.level = new_level
-         winner.current_health_point = winner.current_health_point + status_up.health
-         winner.attack = winner.attack + status_up.attack
-         winner.defence = winner.defence + status_up.defence
-         winner.speed = winner.speed + status_up.speed  
-      end
-      winner.save
+      flash[:notice] = "#{@pokemon_battle.pokemon_winner.name} WIN, #{@pokemon_battle.pokemon_loser.name} LOSE"
     end
-    @pokemon_battle.save
     redirect_to pokemon_battle_url(@pokemon_battle)
   end
 

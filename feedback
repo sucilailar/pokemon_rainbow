@@ -85,3 +85,5 @@ tab size =2 , pok_calulator
 hilangkan comment yg ga perlu
 binding pry comment
 beneri nama variabel harus sesuai dengan apa yg d set
+
+ambil object winner, dan loser
