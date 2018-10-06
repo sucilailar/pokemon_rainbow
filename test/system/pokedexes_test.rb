@@ -44,12 +44,12 @@ class PokedexesTest < ApplicationSystemTestCase
     click_on "Back"
   end
 
-  test "destroying a Pokedexe" do
+  test "destroying a Pokedex" do
     visit pokedexes_url
     page.accept_confirm do
       click_on "Destroy", match: :first
     end
 
-    assert_text "Pokedexe was successfully destroyed"
+    assert_text "Pokedex was successfully destroyed"
   end
 end

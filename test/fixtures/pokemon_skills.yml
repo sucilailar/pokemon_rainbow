@@ -7,5 +7,5 @@ one:
 
 two:
   skill_id: 1
-  pokemon_id: 1
-  current_pp: 1
+  pokemon_id: 2 
+  current_pp: 2

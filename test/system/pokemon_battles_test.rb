@@ -19,7 +19,7 @@ class PokemonBattlesTest < ApplicationSystemTestCase
     fill_in "Pokemon1", with: @pokemon_battle.pokemon1_id
     fill_in "Pokemon1 Max Health Point", with: @pokemon_battle.pokemon1_max_health_point
     fill_in "Pokemon2", with: @pokemon_battle.pokemon2_id
-    fill_in "Pokemon 2 Max Health Point", with: @pokemon_battle.pokemon_2_max_health_point
+    fill_in "Pokemon 2 Max Health Point", with: @pokemon_battle.pokemon2_max_health_point
     fill_in "Pokemon Loser", with: @pokemon_battle.pokemon_loser_id
     fill_in "Pokemon Winner", with: @pokemon_battle.pokemon_winner_id
     fill_in "State", with: @pokemon_battle.state
@@ -38,7 +38,7 @@ class PokemonBattlesTest < ApplicationSystemTestCase
     fill_in "Pokemon1", with: @pokemon_battle.pokemon1_id
     fill_in "Pokemon1 Max Health Point", with: @pokemon_battle.pokemon1_max_health_point
     fill_in "Pokemon2", with: @pokemon_battle.pokemon2_id
-    fill_in "Pokemon 2 Max Health Point", with: @pokemon_battle.pokemon_2_max_health_point
+    fill_in "Pokemon 2 Max Health Point", with: @pokemon_battle.pokemon2_max_health_point
     fill_in "Pokemon Loser", with: @pokemon_battle.pokemon_loser_id
     fill_in "Pokemon Winner", with: @pokemon_battle.pokemon_winner_id
     fill_in "State", with: @pokemon_battle.state

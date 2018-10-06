@@ -1,19 +1,37 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  base_health_point: 1
-  base_attack: 1
-  base_defence: 1
-  base_speed: 1
-  element_type: MyString
-  image_url: MyString
+  base_attack: 49
+  base_defence: 49
+  base_health_point: 45
+  base_speed: 45
+  element_type: "fire"
+  image_url: "http://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png"
+  name: "bulbasaur"
 
 two:
-  name: MyString
-  base_health_point: 1
-  base_attack: 1
-  base_defence: 1
-  base_speed: 1
-  element_type: MyString
-  image_url: MyString
+  name: "bilor"
+  base_health_point: 2
+  base_attack: 2
+  base_defence: 2
+  base_speed: 2
+  element_type: "water"
+  image_url: "YourString"
+
+# three:
+#   name: "MyString"
+#   base_health_point: 1
+#   base_attack: 1
+#   base_defence: 1
+#   base_speed: 1
+#   element_type: fire
+#   image_url: "MyString"
+
+# four:
+#   name: "Aku"
+#   base_health_point: 1
+#   base_attack: 1
+#   base_defence: 1
+#   base_speed: 1
+#   element_type: "water"
+#   image_url: "MyString"

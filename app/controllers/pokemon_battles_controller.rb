@@ -104,7 +104,7 @@ class PokemonBattlesController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def pokemon_battle_params
-      params.require(:pokemon_battle).permit(:pokemon1_id, :pokemon2_id, :current_turn, :state, :pokemon_winner_id, :pokemon_loser_id, :experience_gain, :pokemon1_max_health_point, :pokemon_2_max_health_point)
+      params.require(:pokemon_battle).permit(:pokemon1_id, :pokemon2_id, :current_turn, :state, :pokemon_winner_id, :pokemon_loser_id, :experience_gain, :pokemon1_max_health_point, :pokemon2_max_health_point)
     end
 
     def pokemon_attack_params

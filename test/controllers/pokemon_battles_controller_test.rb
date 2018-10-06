@@ -17,7 +17,7 @@ class PokemonBattlesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create pokemon_battle" do
     assert_difference('PokemonBattle.count') do
-      post pokemon_battles_url, params: { pokemon_battle: { current_turn: @pokemon_battle.current_turn, experience_gain: @pokemon_battle.experience_gain, pokemon1_id: @pokemon_battle.pokemon1_id, pokemon1_max_health_point: @pokemon_battle.pokemon1_max_health_point, pokemon2_id: @pokemon_battle.pokemon2_id, pokemon_2_max_health_point: @pokemon_battle.pokemon_2_max_health_point, pokemon_loser_id: @pokemon_battle.pokemon_loser_id, pokemon_winner_id: @pokemon_battle.pokemon_winner_id, state: @pokemon_battle.state } }
+      post pokemon_battles_url, params: { pokemon_battle: { current_turn: @pokemon_battle.current_turn, experience_gain: @pokemon_battle.experience_gain, pokemon1_id: @pokemon_battle.pokemon1_id, pokemon1_max_health_point: @pokemon_battle.pokemon1_max_health_point, pokemon2_id: @pokemon_battle.pokemon2_id, pokemon2_max_health_point: @pokemon_battle.pokemon2_max_health_point, pokemon_loser_id: @pokemon_battle.pokemon_loser_id, pokemon_winner_id: @pokemon_battle.pokemon_winner_id, state: @pokemon_battle.state } }
     end
 
     assert_redirected_to pokemon_battle_url(PokemonBattle.last)
@@ -34,7 +34,7 @@ class PokemonBattlesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update pokemon_battle" do
-    patch pokemon_battle_url(@pokemon_battle), params: { pokemon_battle: { current_turn: @pokemon_battle.current_turn, experience_gain: @pokemon_battle.experience_gain, pokemon1_id: @pokemon_battle.pokemon1_id, pokemon1_max_health_point: @pokemon_battle.pokemon1_max_health_point, pokemon2_id: @pokemon_battle.pokemon2_id, pokemon_2_max_health_point: @pokemon_battle.pokemon_2_max_health_point, pokemon_loser_id: @pokemon_battle.pokemon_loser_id, pokemon_winner_id: @pokemon_battle.pokemon_winner_id, state: @pokemon_battle.state } }
+    patch pokemon_battle_url(@pokemon_battle), params: { pokemon_battle: { current_turn: @pokemon_battle.current_turn, experience_gain: @pokemon_battle.experience_gain, pokemon1_id: @pokemon_battle.pokemon1_id, pokemon1_max_health_point: @pokemon_battle.pokemon1_max_health_point, pokemon2_id: @pokemon_battle.pokemon2_id, pokemon2_max_health_point: @pokemon_battle.pokemon2_max_health_point, pokemon_loser_id: @pokemon_battle.pokemon_loser_id, pokemon_winner_id: @pokemon_battle.pokemon_winner_id, state: @pokemon_battle.state } }
     assert_redirected_to pokemon_battle_url(@pokemon_battle)
   end
 

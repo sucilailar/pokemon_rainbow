@@ -16,11 +16,11 @@ class PokedexesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create pokedex" do
-    assert_difference('Pokedexe.count') do
-      post pokedexes_url, params: { pokedex: { base_attack: @pokedex.base_attack, base_defence: @pokedex.base_defence, base_health_point: @pokedex.base_health_point, base_speed: @pokedex.base_speed, element_type: @pokedex.element_type, image_url: @pokedex.image_url, name: @pokedex.name } }
+    assert_difference('Pokedex.count') do
+      post pokedexes_url, params: { pokedex: { name: @pokedex.name, base_attack: @pokedex.base_attack, base_defence: @pokedex.base_defence, base_health_point: @pokedex.base_health_point, base_speed: @pokedex.base_speed, element_type: @pokedex.element_type, image_url: @pokedex.image_url,  } }
     end
 
-    assert_redirected_to pokedex_url(Pokedexe.last)
+    assert_redirected_to pokedex_url(Pokedex.last)
   end
 
   test "should show pokedex" do
@@ -39,7 +39,7 @@ class PokedexesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy pokedex" do
-    assert_difference('Pokedexe.count', -1) do
+    assert_difference('Pokedex.count', -1) do
       delete pokedex_url(@pokedex)
     end
 
