@@ -87,6 +87,7 @@ class PokemonBattlesController < ApplicationController
   end
 
   def surrender
+    @action_params = params[:action]
     attacker = Pokemon.find(pokemon_attack_params[:attacker])
     defender = Pokemon.find(pokemon_attack_params[:defender])
     skill = Skill.find(pokemon_attack_params[:skill_id])

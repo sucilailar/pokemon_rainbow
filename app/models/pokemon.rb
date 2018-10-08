@@ -12,8 +12,5 @@ class Pokemon < ApplicationRecord
 	validates :attack, presence: true,  :numericality => {  greater_than: 0}
 	validates :defence, presence: true,  :numericality => {  greater_than: 0}
 	validates :speed, presence: true,  :numericality => {  greater_than: 0}
-	validates :level, presence: true,  :numericality => {  greater_than: 0}
-	
-
-	 
+	validates :level, presence: true,  :numericality => {  greater_than: 0} 
 end

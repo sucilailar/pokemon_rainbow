@@ -10,17 +10,21 @@ class BattleEngine
 	end
 
 	def valid_next_turn?
-		if @pokemon_battle.state == "ongoing"
-				return true
-			else
-				return false
+
+		if @pokemon_battle.state == "ongoing" 
+      if @pokemon_battle.current_turn % 2 == 1 && @attacker.id == @pokemon_battle.pokemon1_id
+        return true	
+			elsif @pokemon_battle.current_turn % 2 == 0 && @attacker.id == @pokemon_battle.pokemon2_id
+        return true 
+      end
+      return false
 		end
 	end
 
 	def next_turn!
 		if @action_params == "attack"
 			attack_engine!
-		else
+		elsif @action_params == "surrender"
 			surrender_engine!
 		end
 		save!
@@ -53,6 +57,7 @@ class BattleEngine
 	end
 
 	def attack_engine!
+
 		@pokemon_skill = PokemonSkill.find_by(pokemon_id: @attacker.id, skill_id: @skill)
     damage = PokemonBattleCalculator.calculate_damage(@attacker, @defender, @skill) 
     if @defender.current_health_point < damage
