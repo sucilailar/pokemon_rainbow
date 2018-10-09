@@ -5,6 +5,7 @@ class Skill < ApplicationRecord
 			   "steel", "fairy"]
 
 	has_many :pokemon_skills
+	has_many :pokemon_battle_logs
 	has_many :pokemons, through: :pokemon_skills
 
 	validates :name, uniqueness: true, presence: true, length: { maximum: 45 }

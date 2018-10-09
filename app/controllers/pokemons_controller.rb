@@ -86,10 +86,41 @@ class PokemonsController < ApplicationController
       redirect_to pokemons_url, notice: 'Pokemon was successfully destroyed.'
   end
 
+  def heal 
+    @pokemon_heal = Pokemon.find(params[:id])
+    @pokemon_battle = PokemonBattle.where("pokemon1_id = ? OR pokemon2_id = ?", @pokemon_heal, @pokemon_heal)
+    state = @pokemon_battle.pluck(:state)
+    if state.include?("ongoing")
+      flash[:notice] = "Pokemon #{@pokemon_heal.name} was ongoing battle"
+    elsif
+      @pokemon_heal.update_attribute(:current_health_point, @pokemon_heal.max_health_point)
+      @pokemon_heal.save
+    flash[:notice] = "Pokemon #{@pokemon_heal.name} was successfully healed."
+    end
+     redirect_to pokemons_url 
+  end
+
+  def heal_all
+    @pokemon_heal_all = Pokemon.all
+    @pokemon_heal_all.each do |pokemon|
+    pokemon_battle = PokemonBattle.where("pokemon1_id = ? OR pokemon2_id = ?", pokemon, pokemon)
+    state = pokemon_battle.pluck(:state)
+      if !state.include?("ongoing")
+        pokemon.update_attribute(:current_health_point, pokemon.max_health_point)
+        pokemon.save
+      flash[:notice] = "Pokemon #{pokemon.name} was successfully healed."
+      elsif
+        flash[:notice] = "Pokemon #{pokemon.name} was ongoing battle"
+      end
+    end
+    redirect_to pokemons_url 
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_pokemon
       @pokemon = Pokemon.find(params[:id])
+     
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

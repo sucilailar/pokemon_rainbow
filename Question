@@ -71,3 +71,49 @@ maka muncul notice pokemon mana yg health point nya
 
 defender
 attacker.cu
+
+
+masih ga bsa bedain kalau mau ambil banyak 
+
+
+apa yang kamu pelajari
+1. ambil objek lempar objek
+2. fetch data kalau 1 harus gmna (pake find) kalau banyak pake where
+3. klw pake where return nya array
+4. kalau pake find return nya objek
+5. ga bsa ambil bnyk data pake where klw mau ambil data, select, di akalin pake pluck: ambil semua isi dari atrtibute tertentu
+6. membuat relasi di rails yang punya bnyk foreign key nya dalam satu tabel
+7. bikin library supaya di controller tidak terlalu banyak code dan code d lib bsa d gunakan kmbbali
+8. nested resource
+9. bikiin testing
+10. apply css bootstrap 4 ke html
+11. paginate
+12. bikin flash
+13. lebih paham ttg params
+14. lebih paham ttg before action/after action
+15. memasukan data secara otomatis tanpa query insert into
+16. mengakses data yg punyai relasi tanpa menggunakan join
+17. membuat dropdown rails
+18. belajar map
+19. generate csv ke database melalui seeds
+20. membuat relational database dengan rails
+21. on: :member di routes untuk ambil id parent path
+22. on: :collection di routes untuk mengambil semua data dari table yg bersangkutan
+
+
+kesulitan
+1. sulit untuk menerjemahkan logika ke cara rails nya
+2. setiap kasus berbeda cara mengambil datanya, akses data dll
+3. blm tau terlalu bnyak ttg active record query
+4. materinya tersebar dmna2, butuhkan waktu bnyak buat nyari
+
+feedback untuk spec
+1. akan lebih baik dan menghemat waktu jika materinya terkumpul dalam 1 sumber
+2. minim nya contoh untuk suatu query/code
+   walaupun bnyak di internet namun kadang berbeda dengan apa yang kita butuhkan 
+   dan tidak terlalu jelas
+3. element type di pokedex dan skill ada. itu beda atau sama? kalo sama kenapa ga salah satu aja dibuat table sendiri
+4. stab 1.5 kalo element nya sama, ujung2nya element emang sama semua
+
+feedback untuk mentor
+1. Menyelesaikan yg blm rapi , (kebanyakan front end)

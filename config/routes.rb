@@ -2,8 +2,11 @@ Rails.application.routes.draw do
   resources :pokemon_battles do 
     patch 'attack', on: :member
     patch 'surrender', on: :member
+    resources :pokemon_battle_logs
   end
   resources :pokemons do
+    get 'heal', on: :member
+    get 'heal_all', on: :collection
   	resources :pokemon_skills
   end
   resources :skills

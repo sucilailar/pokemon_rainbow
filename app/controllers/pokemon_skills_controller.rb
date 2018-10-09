@@ -3,9 +3,9 @@ class PokemonSkillsController < ApplicationController
 
   def create
     @pokemon_skill = PokemonSkill.new(pokemon_skill_params)
-    @pokemon_skill.pokemon_id = params[:pokemon_id]
-    skill = Skill.find(@pokemon_skill.skill_id)
-    @pokemon_skill.current_pp = skill.max_pp
+    @pokemon_skill.pokemon_id = params[:pokemon_id] #ambil pokemon id
+    skill = Skill.find(@pokemon_skill.skill_id) #ambil skill id
+    @pokemon_skill.current_pp = skill.max_pp #set current pp ke max pp di table skill
 
     
       if @pokemon_skill.save

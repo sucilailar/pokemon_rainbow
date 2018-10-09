@@ -1,0 +1,52 @@
+<%= form_with(model: pokemon_battle_log, local: true) do |form| %>
+  <% if pokemon_battle_log.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pokemon_battle_log.errors.count, "error") %> prohibited this pokemon_battle_log from being saved:</h2>
+
+      <ul>
+      <% pokemon_battle_log.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :pokemon_battle_id %>
+    <%= form.number_field :pokemon_battle_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :turn %>
+    <%= form.number_field :turn %>
+  </div>
+
+  <div class="field">
+    <%= form.label :attacker_id %>
+    <%= form.number_field :attacker_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :attacker_current_health_point %>
+    <%= form.number_field :attacker_current_health_point %>
+  </div>
+
+  <div class="field">
+    <%= form.label :defender_id %>
+    <%= form.number_field :defender_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :defender_current_health_point %>
+    <%= form.number_field :defender_current_health_point %>
+  </div>
+
+  <div class="field">
+    <%= form.label :action_type %>
+    <%= form.text_field :action_type %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

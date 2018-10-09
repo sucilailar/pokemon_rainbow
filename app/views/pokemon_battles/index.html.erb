@@ -17,7 +17,7 @@
       <th>Experience</th>
       <th>Pokemon1 Max HP</th>
       <th>Pokemon 2 Max HP</th>
-      <th colspan="3">Action</th>
+      <th colspan="4">Action</th>
     </tr>
   </thead>
 
@@ -37,6 +37,7 @@
         <td><%= link_to 'Show', pokemon_battle,  class: 'btn btn-primary' %></td>
         <td><%= link_to 'Edit', edit_pokemon_battle_path(pokemon_battle), class: 'btn btn-warning' %></td>
         <td><%= link_to 'Destroy', pokemon_battle, class: 'btn btn-danger' , method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Battle Log',  pokemon_battle_pokemon_battle_logs_path(pokemon_battle),  class: 'btn btn-primary' %></td>
       </tr>
     <% end %>
   </tbody>

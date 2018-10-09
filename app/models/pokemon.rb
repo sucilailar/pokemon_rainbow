@@ -5,6 +5,7 @@ class Pokemon < ApplicationRecord
 	has_many :pokemon_skills
 	has_many :skills, through: :pokemon_skills
 	has_many :pokemon_battles
+	has_many :pokemon_battle_logs
 
 	validates :current_health_point, presence: true,  :numericality => { less_than_or_equal_to: :max_health_point, greater_than_or_equal_to: 0}
 	validates :current_experience, presence: true,  :numericality => { greater_than_or_equal_to: 0}
@@ -13,4 +14,6 @@ class Pokemon < ApplicationRecord
 	validates :defence, presence: true,  :numericality => {  greater_than: 0}
 	validates :speed, presence: true,  :numericality => {  greater_than: 0}
 	validates :level, presence: true,  :numericality => {  greater_than: 0} 
+
+
 end

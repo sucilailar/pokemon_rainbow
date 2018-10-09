@@ -87,3 +87,15 @@ binding pry comment
 beneri nama variabel harus sesuai dengan apa yg d set
 
 ambil object winner, dan loser
+
+
+heal:
+- ambil pokemon A
+- ambil semua pokemon battle yang pokemon 1 atau pokemon 2 nya dalah pokemon A
+- cek state semua pokemon battle yang sudah diambil ada ongoing atau ga (pakai include)
+- kalo iya ga bisa di heal
+- kalo ga hp pokemon A jadi max, current pp pokemon skill nya jadi max
+
+heal all:
+- ambil semua pokemon lalu di each
+- jadi proses kaya diatas

@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pokemon battle:</strong>
+  <%= @pokemon_battle_log.pokemon_battle_id %>
+</p>
+
+<p>
+  <strong>Turn:</strong>
+  <%= @pokemon_battle_log.turn %>
+</p>
+
+<p>
+  <strong>Attacker:</strong>
+  <%= @pokemon_battle_log.attacker_id %>
+</p>
+
+<p>
+  <strong>Attacker current health point:</strong>
+  <%= @pokemon_battle_log.attacker_current_health_point %>
+</p>
+
+<p>
+  <strong>Defender:</strong>
+  <%= @pokemon_battle_log.defender_id %>
+</p>
+
+<p>
+  <strong>Defender current health point:</strong>
+  <%= @pokemon_battle_log.defender_current_health_point %>
+</p>
+
+<p>
+  <strong>Action type:</strong>
+  <%= @pokemon_battle_log.action_type %>
+</p>
+
+<%= link_to 'Edit', edit_pokemon_battle_log_path(@pokemon_battle_log) %> |
+<%= link_to 'Back', pokemon_battle_logs_path %>

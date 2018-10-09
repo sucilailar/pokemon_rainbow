@@ -24,6 +24,9 @@ class PokemonBattlesController < ApplicationController
     @skill_select2 = PokemonSkill.where("pokemon_id = ? AND current_pp > ?", @pokemon2.id, 0).map{|pokemon_skill|
         ["#{pokemon_skill.skill.name} (#{pokemon_skill.current_pp}/#{pokemon_skill.skill.max_pp})", pokemon_skill.skill.id]
     }
+
+    @pokemon_battle_log = PokemonBattleLog.new
+    @pokemon_battle_logs = PokemonBattleLog.where(pokemon_battle_id: @pokemon_battle.id)
   end
   # GET /pokemon_battles/new
   def new
@@ -83,6 +86,9 @@ class PokemonBattlesController < ApplicationController
     if @pokemon_battle.pokemon_winner_id.present?
       flash[:notice] = "#{@pokemon_battle.pokemon_winner.name} WIN, #{@pokemon_battle.pokemon_loser.name} LOSE"
     end
+    #     require 'pry'
+    # binding.pry
+    # ?@battle_log = PokemonBattleLog.new(attacker, defender, skill, @action_params, @pokemon_battle)
     redirect_to pokemon_battle_url(@pokemon_battle)
   end
 
@@ -91,7 +97,12 @@ class PokemonBattlesController < ApplicationController
     attacker = Pokemon.find(pokemon_attack_params[:attacker])
     defender = Pokemon.find(pokemon_attack_params[:defender])
     skill = Skill.find(pokemon_attack_params[:skill_id])
-    @battle_encaps = BattleEngine.new(attacker, defender, skill, @pokemon_battle)
+    @battle_encaps = BattleEngine.new(attacker, defender, skill, @pokemon_battle, @action_params)
+    if @battle_encaps.valid_next_turn?
+      @battle_encaps.next_turn!
+    else
+      flash[:notice] = "Invalid Next Turn"
+    end
     if @pokemon_battle.pokemon_winner_id.present?
       flash[:notice] = "#{@pokemon_battle.pokemon_winner.name} WIN, #{@pokemon_battle.pokemon_loser.name} LOSE"
     end

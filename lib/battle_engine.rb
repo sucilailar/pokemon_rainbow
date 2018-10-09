@@ -1,6 +1,6 @@
 class BattleEngine
 
-	attr_reader :attacker, :defender, :skill, :pokemon_battle
+	attr_reader :attacker, :defender, :skill, :pokemon_battle, :action_params
 	def initialize(attacker, defender, skill, pokemon_battle_id, action_params)
 		@attacker = attacker
 		@defender = defender
@@ -10,7 +10,6 @@ class BattleEngine
 	end
 
 	def valid_next_turn?
-
 		if @pokemon_battle.state == "ongoing" 
       if @pokemon_battle.current_turn % 2 == 1 && @attacker.id == @pokemon_battle.pokemon1_id
         return true	
@@ -35,6 +34,7 @@ class BattleEngine
 		@pokemon_battle.pokemon_winner_id = defender.id
     @pokemon_battle.pokemon_loser_id = attacker.id
     @pokemon_battle.state = "finish"
+    @pokemon_battle.current_turn += 1
     if @pokemon_battle.pokemon_winner_id.present?
       loser = Pokemon.find(@pokemon_battle.pokemon_loser_id)
       winner = Pokemon.find(@pokemon_battle.pokemon_winner_id)  
@@ -59,11 +59,11 @@ class BattleEngine
 	def attack_engine!
 
 		@pokemon_skill = PokemonSkill.find_by(pokemon_id: @attacker.id, skill_id: @skill)
-    damage = PokemonBattleCalculator.calculate_damage(@attacker, @defender, @skill) 
-    if @defender.current_health_point < damage
+    @damage = PokemonBattleCalculator.calculate_damage(@attacker, @defender, @skill) 
+    if @defender.current_health_point < @damage
          @defender.current_health_point = 0
     else
-          min_hp = @defender.current_health_point - damage
+          min_hp = @defender.current_health_point - @damage
           @defender.current_health_point = min_hp
     end
     @pokemon_battle.current_turn += 1
@@ -104,6 +104,21 @@ class BattleEngine
 		@pokemon_skill.save
     @defender.save
     @pokemon_battle.save
+    @pokemon_battle_log = PokemonBattleLog.new
+    @pokemon_battle_log.pokemon_battle_id = @pokemon_battle.id
+    @pokemon_battle_log.turn = @pokemon_battle.current_turn - 1
+
+    @pokemon_battle_log.damage = @damage#ambil dari lib/PokemonBattleCalculator
+    @pokemon_battle_log.attacker_id = @attacker.id
+    @pokemon_battle_log.attacker_current_health_point = @attacker.current_health_point
+    @pokemon_battle_log.defender_id= @defender.id
+    @pokemon_battle_log.defender_current_health_point = @defender.current_health_point
+    @pokemon_battle_log.action_type = @action_params
+    @pokemon_battle_log.skill_id = @skill.id
+
+    @pokemon_battle_log.save
 	end
+
+
 
 end

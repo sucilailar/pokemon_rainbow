@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Pokemon Battle Logs</h1>
+<br>
+<h4>Pokemon Battle id: <%= params[:pokemon_battle_id] %></h4>
+<table class="table table-striped mt-3" border="1">
+  <thead class="thead-dark text-center">
+    <tr>
+
+      <th>Turn</th>
+      <th>Attacker</th>
+      <th>Attacker current health point</th>
+      <th>Defender</th>
+      <th>Defender current health point</th>
+      <th>Action type</th>
+      <th>Damage</th>
+      <th>Skill</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pokemon_battle_logs.each do |pokemon_battle_log| %>
+      <tr>
+        <td><%= pokemon_battle_log.turn %></td>
+        <td><%= pokemon_battle_log.attacker.name %></td>
+        <td><%= pokemon_battle_log.attacker_current_health_point %></td>
+        <td><%= pokemon_battle_log.defender.name %></td>
+        <td><%= pokemon_battle_log.defender_current_health_point %></td>
+        <td><%= pokemon_battle_log.action_type %></td>
+        <td><%= pokemon_battle_log.damage %></td>
+        <td><%= pokemon_battle_log.skill.name %></td>
+
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
